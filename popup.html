@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YTpop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <span class="inline">
+    <img src="/favicon.png" height="25">
+    <h1 style="margin:0">YT Pop</h1>
+  </span>
+  <details open>
+    <summary>Functional</summary>
+    <label class="switch">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+    <label for="enabled">No ad player</label>
+    <br>
+    <label class="switch">
+      <input type="checkbox" id="down">
+      <span class="slider"></span>
+    </label>
+    <label for="down">Download button</label>
+    <br>
+    <label class="switch">
+      <input type="checkbox" id="noads">
+      <span class="slider"></span>
+    </label>
+    <label for="noads">No static ads</label>
+  </details>
+  <details open>
+    <summary>Styling</summary>
+    <label class="switch">
+      <input type="checkbox" id="nocurves">
+      <span class="slider"></span>
+    </label>
+    <label for="nocurves">No curves</label>
+    <br>
+    <label class="switch">
+      <input type="checkbox" id="noshorts">
+      <span class="slider"></span>
+    </label>
+    <label for="noshorts">No youtube shorts</label>
+    <br>
+    <label class="switch">
+      <input type="checkbox" id="nothanks">
+      <span class="slider"></span>
+    </label>
+    <label for="nothanks">No thanks button</label>
+    <br>
+    <label class="switch">
+      <input type="checkbox" id="nomix">
+      <span class="slider"></span>
+    </label>
+    <label for="nomix">No playlists (mix) videos</label>
+  </details>
+  
+  <label id="ver" style="position:absolute;right:0;bottom:0;margin:2px;">v0</label>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
