@@ -1,0 +1,50 @@
+{
+  "name": "YTPop",
+  "version": "0.6.4",
+  "description": "Better youtube, by Inv",
+  "icons": {
+  	"512": "./favicon.png"
+  },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "*://youtube.com/*",
+    "*://www.youtube.com/*",
+    "*://gaming.youtube.com/*",
+    "*://m.youtube.com/*",
+    "*://mobile.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://youtube.com/*", "*://www.youtube.com/*", "*://gaming.youtube.com/*", "*://m.youtube.com/*", "*://mobile.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+	  "default_icon": "./favicon.png"
+  },
+  "commands": {
+    "enabled": {
+      "suggested_key": {
+        "default": "Alt+Z"
+      },
+      "description": "Enable/Disable player modifier"
+    },
+    "down": {
+      "suggested_key": {
+        "default": "Alt+X"
+      },
+      "description": "Enable/Disable download button modifier"
+    },
+    "noads": {
+      "suggested_key": {
+        "default": "Alt+C"
+      },
+      "description": "Enable/Disable no static ads modifier"
+    }
+  },
+  "manifest_version": 3
+}
