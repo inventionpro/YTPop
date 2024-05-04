@@ -141,7 +141,7 @@ function noads() {
     document.querySelectorAll('#attached-survey').forEach(t => {t.style.display = 'none';})
     document.querySelectorAll('div.ytp-suggested-action').forEach(t => {t.style.display = 'none';})
     document.querySelectorAll('ytd-brand-video-singleton-renderer').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').playbackRate = 16.0;document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelector('.ytp-ad-skip-button-modern').click()})
+    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration})
     document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
       t.click()
     })
