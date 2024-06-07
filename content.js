@@ -129,22 +129,50 @@ chrome.storage.sync.get('down', function (data) {
   }
 });
 
+let shadowRealm = [];
+function sendToShadowRealm(id) {
+  document.querySelectorAll(id).forEach(t=>{
+    shadowRealm.push(t);
+    t.style.opacity = 0;
+    t.style.width = 0;
+    t.style.height = 0;
+  });
+}
+function unShadowRealm() {
+  shadowRealm.forEach(t=>{
+    t.style.opacity = '';
+    t.style.width = '';
+    t.style.height = '';
+  })
+  shadowRealm = [];
+}
+
 function noads() {
   const observer = new MutationObserver(function(mutations) {
-    document.querySelectorAll('#player-ads').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('.ytd-page-top-ad').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('.ytd-ad-slot-renderer').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('ytd-rich-item-renderer:has(.ytd-ad-slot-renderer)').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('ytd-banner-promo-renderer').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('yt-mealbar-promo-renderer').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('ytd-rich-item-renderer:has(ytd-feed-nudge-renderer)').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('#attached-survey').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('div.ytp-suggested-action').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('ytd-brand-video-singleton-renderer').forEach(t => {t.style.display = 'none';})
-    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration})
+    unShadowRealm()
+    /* Static ads */
+    // ads as videos
+    sendToShadowRealm('ytd-rich-item-renderer:has(.ytd-ad-slot-renderer)')
+    sendToShadowRealm('ytd-rich-item-renderer:has(ytd-feed-nudge-renderer)')
+    sendToShadowRealm('.ytd-ad-slot-renderer')
+    // Other
+    sendToShadowRealm('#player-ads')
+    sendToShadowRealm('#attached-survey')
+    sendToShadowRealm('div.ytp-suggested-action')
+    sendToShadowRealm('ytd-brand-video-singleton-renderer')
+    // Banners
+    sendToShadowRealm('#masthead-ad')
+    sendToShadowRealm('div:has(>ytd-banner-promo-renderer)')
+    sendToShadowRealm('ytd-banner-promo-renderer')
+    sendToShadowRealm('yt-mealbar-promo-renderer')
+    sendToShadowRealm('.ytd-page-top-ad')
+    sendToShadowRealm('.yt-mealbar-promo-renderer')
+
+    /* Video ads */
+    /*document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {t.click()})})
     document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
       t.click()
-    })
+    })*/
   });
   observer.observe(document, {subtree: true, childList: true});
 }
