@@ -169,10 +169,10 @@ function noads() {
     sendToShadowRealm('.yt-mealbar-promo-renderer')
 
     /* Video ads */
-    /*document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {t.click()})})
+    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {t.click()})})
     document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
       t.click()
-    })*/
+    })
   });
   observer.observe(document, {subtree: true, childList: true});
 }
