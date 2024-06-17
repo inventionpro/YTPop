@@ -3,10 +3,13 @@
   "version": "0.6.5",
   "description": "Better youtube, by Inv",
   "icons": {
-  	"512": "./favicon.png"
+    "512": "./favicon.png"
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "host_permissions": [
+    "*://example.com/*",
     "*://youtube.com/*",
     "*://www.youtube.com/*",
     "*://gaming.youtube.com/*",
@@ -24,7 +27,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-	  "default_icon": "./favicon.png"
+    "default_icon": "./favicon.png"
   },
   "commands": {
     "enabled": {
