@@ -6,6 +6,8 @@ chrome.runtime.onInstalled.addListener(function () {
       chrome.storage.sync.set({ 'enabled': false });
       chrome.storage.sync.set({ 'down': true });
       chrome.storage.sync.set({ 'noads': true });
+      chrome.storage.sync.set({ 'novideoads': true });
+      chrome.storage.sync.set({ 'norick': false });
       chrome.storage.sync.set({ 'nocurves': false });
       chrome.storage.sync.set({ 'noshorts': false });
       chrome.storage.sync.set({ 'nothanks': true });
