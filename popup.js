@@ -10,12 +10,13 @@ function set(name) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  ['enabled','down','noads','nocurves','noshorts','nothanks','nomix'].forEach(e => {
+  ['enabled','down','noads','novideoads','norick','nocurves','noshorts','nothanks','nomix'].forEach(e => {
     set(e)
   })
   
-  chrome.storage.onChanged.addListener(function (changes) {
+  chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (let key in changes) {
+      console.log(key)
       document.getElementById(key).checked = changes[key].newValue;
     }
   })
