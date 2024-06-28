@@ -7,6 +7,17 @@ function id() {
   return (window.location.href.split('v=')[1] || '').split('&')[0];
 }
 
+// very high in file for priority
+chrome.storage.sync.get('norick', function (data) {
+  if (data.norick) {
+    let rick = 'dQw4w9WgXcQ,7GbNHtL1NMc,xvFZjo5PgG0,hbGiNEjqYL0,7_pRiUfp938,i3EFT4SZPo0,cErgMJSgpv0'.split(',');
+    if (rick.includes(id())) {
+      window.Audio = function(){};
+      document.querySelector("ytd-player").innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:25px;font-weight:bold;">Blocked Rick</div>`;
+    }
+  }
+});
+
 function shut() {
   document.querySelector('.video-stream.html5-main-video').pause();
   document.querySelector('.video-stream.html5-main-video').muted = true
@@ -99,7 +110,29 @@ async function down() {
   while (!document.querySelector('ytd-menu-renderer.style-scope.ytd-watch-metadata')) {
     await delay(500)
   }
-  document.querySelector('#actions ytd-menu-renderer yt-button-shape#button-shape.style-scope.ytd-menu-renderer').insertAdjacentHTML("beforebegin", `<style>button:focus {outline:none;} .ytpopdown{margin-left: 10px;fill: #fff;border: none;background-color: #4e4e4e80;border-radius: 2rem;width: 35px;height: 35px;aspect-ratio:1/1;cursor: pointer;} .ytpopdown:hover{background-color: #80808080}</style>
+  document.querySelector('#actions ytd-menu-renderer yt-button-shape#button-shape.style-scope.ytd-menu-renderer').insertAdjacentHTML("beforebegin", `<style>
+  button:focus {
+    outline: none;
+  }
+  .ytpopdown {
+    margin-left: 10px;
+    fill: #fff;
+    border: none;
+    background-color: #4e4e4e80;
+    border-radius: 2rem;
+    width: 35px;
+    height: 35px;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+  }
+  .ytpopdown:hover {
+    background-color: #80808080;
+  }
+  ::backdrop {
+    background-color: #000;
+    opacity: 0.3;
+  }
+</style>
 <button onclick="document.getElementById('ytpopmodal').showModal()" class="ytpopdown">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><path d="M17 18v1H6v-1h11zm-.5-6.6-.7-.7-3.8 3.7V4h-1v10.4l-3.8-3.8-.7.7 5 5 5-4.9z"></path></svg>
 </button>
@@ -108,7 +141,7 @@ async function down() {
   <p>Download this youtube video</p>
   <br>
   <label>Type:</label>
-  <select style="color: #fff;background-color: #212121;border: #fff 1px solid;padding: 2px;border-radius: 0.75rem;margin-bottom: 5px;">
+  <select style="color:#fff;background-color:#212121;border:#fff 1px solid;padding:2px;border-radius:0.75rem;margin-bottom: 5px;">
     <option value="video">Video (mp4)</option>
     <option value="audio">Audio (mp3)</option>
   </select>
@@ -116,6 +149,7 @@ async function down() {
   <button onclick="const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value + '?id='+(window.location.href.split('v=')[1] || '').split('&')[0];fetch(url).then(async e => {e = await e.json();window.open(e.download);});" style="background-color: #3ea6ff;border: none;padding: 6px;margin: 4px;border-radius: 1rem;cursor: pointer;">Download</button>
   <button onclick="document.getElementById('ytpopmodal').close()" style="border: none;color: #3ea6ff;background: transparent;position: absolute;right: 0;bottom: 0;padding: 16px 30px;cursor: pointer;">Close</button>
 </dialog>`)
+  //document.querySelector('#above-the-fold #title h1 yt-formatted-string').innerHTML
   const observer = new MutationObserver(function(mutations) {
     document.querySelectorAll('#flexible-item-buttons.style-scope.ytd-menu-renderer ytd-download-button-renderer').forEach(t => {t.style.display = 'none';})
 	  document.querySelectorAll('tp-yt-paper-listbox.style-scope.ytd-menu-popup-renderer ytd-menu-service-item-download-renderer').forEach(t => {t.style.display = 'none';})
@@ -136,6 +170,9 @@ function sendToShadowRealm(id) {
     t.style.opacity = 0;
     t.style.width = 0;
     t.style.height = 0;
+    t.style.margin = 0;
+    t.style.padding = 0;
+    t.style['pointer-events'] = 'none';
   });
 }
 function unShadowRealm() {
@@ -173,6 +210,16 @@ function noads() {
     document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
       t.click()
     })
+    
+    /* Ad blocking blocking */
+    sendToShadowRealm('#buttons.style-scope.ytd-enforcement-message-view-model')
+    sendToShadowRealm('#divider.style-scope.ytd-enforcement-message-view-model')
+    sendToShadowRealm('#feedback.style-scope.ytd-enforcement-message-view-model')
+    document.querySelectorAll('#body.style-scope.ytd-enforcement-message-view-model').forEach(e=>{
+      e.innerHTML=`<p>Sorry, seems like youtube has flagged YTPop or another ad blocking extension.</p>
+<p>If you only have YTPop enabled, create a issue in the <a href="https://github.com/inventionpro/YTPop/issues" style="color:#b7f">Github</a></p>
+<button>Close</button>`;
+    })
   });
   observer.observe(document, {subtree: true, childList: true});
 }
@@ -180,6 +227,26 @@ function noads() {
 chrome.storage.sync.get('noads', function (data) {
   if (data.noads) {
     noads()
+  }
+});
+
+// TODO: fix yt flagging this
+function novideoads() {
+  const observer = new MutationObserver(function(mutations) {
+    /* Video ads */
+    // Skip to end
+    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {t.click()})})
+    // Press skip button
+    document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
+      t.click()
+    })
+  });
+  observer.observe(document, {subtree: true, childList: true});
+}
+
+chrome.storage.sync.get('novideoads', function (data) {
+  if (data.novideoads) {
+    novideoads()
   }
 });
 
