@@ -1,12 +1,16 @@
-<img src="favicon.png" alt="drawing" width="100">
+<img src="favicon.png" alt="YT Pop Logo" width="100">
 
 # YTPop
 Better youtube
 ## Features
+Features can be turned on and off
+### Functional
 - Custom player (with no ads)
-- Ads removal (static and video)
 - Download button (audio and video)
-### Visual options
+- Static Ad removal
+- Video Ad removal (Youtube currently flags this)
+- Anti rickroll
+### Styling
 - No curves
 - No yt shorts
 - No thanks button
