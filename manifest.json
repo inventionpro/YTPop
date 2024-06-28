@@ -1,6 +1,6 @@
 {
   "name": "YTPop",
-  "version": "0.6.5",
+  "version": "0.7.0",
   "description": "Better youtube, by Inv",
   "icons": {
     "512": "./favicon.png"
@@ -47,6 +47,12 @@
         "default": "Alt+C"
       },
       "description": "Enable/Disable no static ads modifier"
+    },
+    "novideoads": {
+      "suggested_key": {
+        "default": "Alt+V"
+      },
+      "description": "Enable/Disable no video ads modifier"
     }
   },
   "manifest_version": 3
