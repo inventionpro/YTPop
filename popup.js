@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     set(e)
   })
   
-  chrome.storage.onChanged.addListener(function (changes, namespace) {
+  chrome.storage.onChanged.addListener(function (changes) {
     for (let key in changes) {
       console.log(key)
       document.getElementById(key).checked = changes[key].newValue;
