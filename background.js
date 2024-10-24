@@ -1,20 +1,26 @@
 // On chrome initialization
 chrome.runtime.onInstalled.addListener(function () {
+  function nullish(name, def) {
+    chrome.storage.sync.get(name, function (data) {
+      if (data[name] == null) {
+        let h = {};
+        h[name] = def;
+        chrome.storage.sync.set(h);
+      }
+    });
+  }
   // Default settings
-  chrome.storage.sync.get('enabled', function (data) {
-    if (data.enabled == null) {
-      chrome.storage.sync.set({ 'enabled': false });
-      chrome.storage.sync.set({ 'down': true });
-      chrome.storage.sync.set({ 'noads': true });
-      chrome.storage.sync.set({ 'novideoads': false });
-      chrome.storage.sync.set({ 'norick': false });
-      chrome.storage.sync.set({ 'nocurves': false });
-      chrome.storage.sync.set({ 'noshorts': false });
-      chrome.storage.sync.set({ 'nothanks': true });
-      chrome.storage.sync.set({ 'nomix': false });
-    }
-  });
-  
+  nullish('enabled', false);
+  nullish('down', true);
+  nullish('noads', true);
+  nullish('novideoads', false);
+  nullish('norick', false);
+  nullish('nocurves', false);
+  nullish('noshorts', false);
+  nullish('nothanks', true);
+  nullish('nomix', false);
+  nullish('nopink', false);
+
   // Shortcuts
   chrome.commands.onCommand.addListener((command) => {
     chrome.storage.sync.get(command, function (data) {
