@@ -1,5 +1,5 @@
 // Banner
-console.log('%cYou%ctube%c %cPop%c\nBetter youtube', 'color:#f00;font-size:40px;font-weight:bold;font-family:Arial', 'background:#f00;color:#fff;border-radius:0.5rem;font-size:40px;font-weight:bold;font-family:Arial', 'font-size:40px', 'color:#b7f;font-size:40px;font-weight:bold;font-family:Arial', 'font-family:Arial');
+console.log('%cYou%cTube%c %cPop%c\nBetter youtube', 'color:#f00;font-size:40px;font-weight:bold;font-family:Arial', 'background:#f00;color:#fff;border-radius:0.5rem;font-size:40px;font-weight:bold;font-family:Arial', 'font-size:40px', 'color:#b7f;font-size:40px;font-weight:bold;font-family:Arial', 'font-family:Arial');
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -204,12 +204,10 @@ function noads() {
     sendToShadowRealm('yt-mealbar-promo-renderer')
     sendToShadowRealm('.ytd-page-top-ad')
     sendToShadowRealm('.yt-mealbar-promo-renderer')
-
-    /* Video ads */
-    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {t.click()})})
-    document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
-      t.click()
-    })
+    sendToShadowRealm('.ytd-companion-slot-renderer')
+    sendToShadowRealm('ytd-companion-slot-renderer')
+    sendToShadowRealm('ytd-player-legacy-desktop-watch-ads-renderer')
+    sendToShadowRealm('#player-ads')
     
     /* Ad blocking blocking */
     sendToShadowRealm('#buttons.style-scope.ytd-enforcement-message-view-model')
@@ -276,6 +274,17 @@ chrome.storage.sync.get('nomix', function (data) {
   if (data.nomix) {
     const observer = new MutationObserver(function(mutations) {
     document.querySelectorAll('ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-renderer.ytd-playlist-thumbnail)').forEach(t => {t.style.display = 'none';})
+  });
+  observer.observe(document, {subtree: true, childList: true});
+  }
+});
+
+chrome.storage.sync.get('nopink', function (data) {
+  if (data.nopink) {
+    const observer = new MutationObserver(function(mutations) {
+    document.querySelectorAll('[enable-refresh-signature-moments-web]').forEach(t => {t.removeAttribute('enable-refresh-signature-moments-web')});
+    document.querySelectorAll('.ytp-cairo-refresh-signature-moments').forEach(t => {t.classList.remove('ytp-cairo-refresh-signature-moments')});
+    document.querySelectorAll('.ytp-cairo-refresh').forEach(t => {t.classList.remove('ytp-cairo-refresh')});
   });
   observer.observe(document, {subtree: true, childList: true});
   }
