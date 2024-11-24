@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function () {
   ['enabled','down','noads','novideoads','norick','nocurves','noshorts','nothanks','nomix','nopink'].forEach(e => {
     set(e)
   })
-  
-  chrome.storage.onChanged.addListener(function (changes, namespace) {
+
+  chrome.storage.onChanged.addListener(function(changes) {
     for (let key in changes) {
       console.log(key)
       document.getElementById(key).checked = changes[key].newValue;
     }
   })
-  
+
   var manifestData = chrome.runtime.getManifest();
   document.getElementById('ver').innerHTML = 'v'+manifestData.version+' m'+manifestData.manifest_version;
   chrome.commands.getAll((commands) => {
