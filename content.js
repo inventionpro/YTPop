@@ -188,26 +188,44 @@ function noads() {
   const observer = new MutationObserver(function(mutations) {
     unShadowRealm()
     /* Static ads */
+    // Feed
+    sendToShadowRealm('.ytd-companion-slot-renderer');
+    sendToShadowRealm('ytd-companion-slot-renderer');
+    sendToShadowRealm('.ytd-action-companion-ad-renderer');
+    sendToShadowRealm('.ytd-watch-next-secondary-results-renderer.sparkles-light-cta');
+    sendToShadowRealm('.ytd-unlimited-offer-module-renderer');
+    sendToShadowRealm('.ytd-display-ad-renderer');
+    sendToShadowRealm('.ytd-statement-banner-renderer');
+    sendToShadowRealm('.ytd-in-feed-ad-layout-renderer');
+    // Deprecated overlay
+    sendToShadowRealm('.ytp-ad-overlay-image');
+    sendToShadowRealm('.ytp-ad-text-overlay');
     // ads as videos
-    sendToShadowRealm('ytd-rich-item-renderer:has(.ytd-ad-slot-renderer)')
-    sendToShadowRealm('ytd-rich-item-renderer:has(ytd-feed-nudge-renderer)')
-    sendToShadowRealm('.ytd-ad-slot-renderer')
+    sendToShadowRealm('ytd-rich-item-renderer:has(.ytd-ad-slot-renderer)');
+    sendToShadowRealm('ytd-rich-item-renderer:has(ytd-feed-nudge-renderer)');
+    sendToShadowRealm('.ytd-ad-slot-renderer');
     // Other
-    sendToShadowRealm('#player-ads')
-    sendToShadowRealm('#attached-survey')
-    sendToShadowRealm('div.ytp-suggested-action')
-    sendToShadowRealm('ytd-brand-video-singleton-renderer')
+    sendToShadowRealm('#player-ads');
+    sendToShadowRealm('#attached-survey');
+    sendToShadowRealm('div.ytp-suggested-action');
+    sendToShadowRealm('ytd-brand-video-singleton-renderer');
+    sendToShadowRealm('div#player-ads.style-scope.ytd-watch-flexy');
+    sendToShadowRealm('div#panels.style-scope.ytd-watch-flexy');
+    sendToShadowRealm('div#root.style-scope.ytd-display-ad-renderer.yt-simple-endpoint');
+    sendToShadowRealm('div#sparkles-container.style-scope.ytd-promoted-sparkles-web-renderer');
     // Banners
-    sendToShadowRealm('#masthead-ad')
-    sendToShadowRealm('div:has(>ytd-banner-promo-renderer)')
-    sendToShadowRealm('ytd-banner-promo-renderer')
-    sendToShadowRealm('yt-mealbar-promo-renderer')
-    sendToShadowRealm('.ytd-page-top-ad')
-    sendToShadowRealm('.yt-mealbar-promo-renderer')
-    sendToShadowRealm('.ytd-companion-slot-renderer')
-    sendToShadowRealm('ytd-companion-slot-renderer')
-    sendToShadowRealm('ytd-player-legacy-desktop-watch-ads-renderer')
-    sendToShadowRealm('#player-ads')
+    sendToShadowRealm('#masthead-ad');
+    sendToShadowRealm('div:has(>ytd-banner-promo-renderer)');
+    sendToShadowRealm('ytd-banner-promo-renderer');
+    sendToShadowRealm('yt-mealbar-promo-renderer');
+    sendToShadowRealm('.ytd-page-top-ad');
+    sendToShadowRealm('.yt-mealbar-promo-renderer');
+    sendToShadowRealm('ytd-player-legacy-desktop-watch-ads-renderer');
+    sendToShadowRealm('#player-ads');
+    // TV
+    sendToShadowRealm('.ytd-banner-promo-renderer');
+    sendToShadowRealm('.ytd-video-masthead-ad-v3-renderer');
+    sendToShadowRealm('.ytd-primetime-promo-renderer');
     
     /* Ad blocking blocking */
     sendToShadowRealm('#buttons.style-scope.ytd-enforcement-message-view-model')
