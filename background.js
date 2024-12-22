@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(function () {
   nullish('enabled', false);
   nullish('down', true);
   nullish('noads', true);
-  nullish('novideoads', false);
+  nullish('novideoads', true);
   nullish('norick', false);
   nullish('nocurves', false);
   nullish('noshorts', false);
