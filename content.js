@@ -186,7 +186,7 @@ function unShadowRealm() {
 
 function noads() {
   const observer = new MutationObserver(function(mutations) {
-    unShadowRealm()
+    unShadowRealm();
     /* Static ads */
     // Feed
     sendToShadowRealm('.ytd-companion-slot-renderer');
@@ -248,14 +248,32 @@ chrome.storage.sync.get('noads', function (data) {
 
 // TODO: fix yt flagging this
 function novideoads() {
+  // Parts from Ad Accelerator
+  const skipButtonSelectors = [
+   // Original version
+   '.ytp-ad-skip-button',
+   '.ytp-ad-skip-button-modern',
+   '.ytp-skip-ad-button',
+   // Observed May 2024
+   '.ytp-skip-ad button',
+   '[id^="skip-ad"] button',
+   '[id^="skip-button"]',
+  ];
   const observer = new MutationObserver(function(mutations) {
     /* Video ads */
-    // Skip to end
-    document.querySelectorAll('.ytp-ad-player-overlay-flyout-cta, .ytp-ad-avatar-lockup-card, .ytp-ad-text').forEach(t=>{document.querySelector('video').currentTime = document.querySelector('video').duration;document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {t.click()})})
+    const video = document.querySelector('video');
+    const adElement = document.querySelector('.video-ads.ytp-ad-module');
+    // Skip
+    if (video && adElement && adElement.children.length > 0) {
+      video.muted = true; // Mute
+      video.playbackRate = 16.0; // Speed up
+      video.currentTime = video.duration-0.1; // Go to end
+    }
     // Press skip button
-    document.querySelectorAll('.ytp-ad-skip-button-modern').forEach(t => {
-      t.click()
-    })
+    const skipButton = document.querySelector(skipButtonSelectors.join(', '));
+    if (skipButton) {
+      skipButton.click()
+    }
   });
   observer.observe(document, {subtree: true, childList: true});
 }
