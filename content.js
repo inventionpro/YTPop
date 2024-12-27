@@ -12,8 +12,8 @@ chrome.storage.sync.get('norick', function (data) {
   if (data.norick) {
     let rick = 'dQw4w9WgXcQ,7GbNHtL1NMc,xvFZjo5PgG0,hbGiNEjqYL0,7_pRiUfp938,i3EFT4SZPo0,cErgMJSgpv0'.split(',');
     if (rick.includes(id())) {
-      window.Audio = function(){};
-      document.querySelector("ytd-player").innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:25px;font-weight:bold;">Blocked Rick</div>`;
+      document.querySelector('video').muted = true;
+      document.querySelector('video').pause();
     }
   }
 });
