@@ -16,3 +16,4 @@ Features can be turned on and off
 - No thanks button
 - No mix (playlists) in feed
 - No pink progress bar
+- Fix channel section sidebar

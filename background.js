@@ -20,6 +20,7 @@ chrome.runtime.onInstalled.addListener(function () {
   nullish('nothanks', true);
   nullish('nomix', false);
   nullish('nopink', false);
+  nullish('fixchannelsection', true);
 
   // Shortcuts
   chrome.commands.onCommand.addListener((command) => {

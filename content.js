@@ -99,7 +99,7 @@ async function change() {
   })
 }
 
-chrome.storage.sync.get('enabled', function (data) {
+chrome.storage.sync.get('enabled', function(data) {
   if (data.enabled) {
     change()
   }
@@ -146,18 +146,18 @@ async function down() {
     <option value="audio">Audio (mp3)</option>
   </select>
   <br>
-  <button onclick="const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value + '?id='+(window.location.href.split('v=')[1] || '').split('&')[0];fetch(url).then(async e => {e = await e.json();window.open(e.download);});" style="background-color: #3ea6ff;border: none;padding: 6px;margin: 4px;border-radius: 1rem;cursor: pointer;">Download</button>
+  <button onclick="const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value + '?id='+(window.location.href.split('v=')[1] || '').split('&')[0]+'&max=99999999999';fetch(url).then(async e => {e = await e.json();window.open(e.download);});" style="background-color: #3ea6ff;border: none;padding: 6px;margin: 4px;border-radius: 1rem;cursor: pointer;">Download</button>
   <button onclick="document.getElementById('ytpopmodal').close()" style="border: none;color: #3ea6ff;background: transparent;position: absolute;right: 0;bottom: 0;padding: 16px 30px;cursor: pointer;">Close</button>
 </dialog>`)
   //document.querySelector('#above-the-fold #title h1 yt-formatted-string').innerHTML
-  const observer = new MutationObserver(function(mutations) {
+  const observer = new MutationObserver(function(){
     document.querySelectorAll('#flexible-item-buttons.style-scope.ytd-menu-renderer ytd-download-button-renderer').forEach(t => {t.style.display = 'none';})
 	  document.querySelectorAll('tp-yt-paper-listbox.style-scope.ytd-menu-popup-renderer ytd-menu-service-item-download-renderer').forEach(t => {t.style.display = 'none';})
   });
   observer.observe(document, {subtree: true, childList: true});
 }
 
-chrome.storage.sync.get('down', function (data) {
+chrome.storage.sync.get('down', function(data) {
   if (data.down) {
     down()
   }
@@ -185,7 +185,7 @@ function unShadowRealm() {
 }
 
 function noads() {
-  const observer = new MutationObserver(function(mutations) {
+  const observer = new MutationObserver(function(){
     unShadowRealm();
     /* Static ads */
     // Feed
@@ -240,7 +240,7 @@ function noads() {
   observer.observe(document, {subtree: true, childList: true});
 }
 
-chrome.storage.sync.get('noads', function (data) {
+chrome.storage.sync.get('noads', function(data) {
   if (data.noads) {
     noads()
   }
@@ -259,7 +259,7 @@ function novideoads() {
    '[id^="skip-ad"] button',
    '[id^="skip-button"]',
   ];
-  const observer = new MutationObserver(function(mutations) {
+  const observer = new MutationObserver(function(){
     /* Video ads */
     const video = document.querySelector('video');
     const adElement = document.querySelector('.video-ads.ytp-ad-module');
@@ -278,25 +278,25 @@ function novideoads() {
   observer.observe(document, {subtree: true, childList: true});
 }
 
-chrome.storage.sync.get('novideoads', function (data) {
+chrome.storage.sync.get('novideoads', function(data) {
   if (data.novideoads) {
-    novideoads()
+    novideoads();
   }
 });
 
-chrome.storage.sync.get('nocurves', function (data) {
+chrome.storage.sync.get('nocurves', function(data) {
   if (data.nocurves) {
-    document.head.insertAdjacentHTML("beforeend", `<style>* {border-radius: 0 !important;}</style>`)
+    document.head.insertAdjacentHTML("beforeend", `<style>* {border-radius: 0 !important;}</style>`);
   }
 });
 
-chrome.storage.sync.get('noshorts', function (data) {
+chrome.storage.sync.get('noshorts', function(data) {
   if (data.noshorts) {
     document.head.insertAdjacentHTML("beforeend", `<style>ytd-rich-section-renderer.style-scope.ytd-rich-grid-renderer,ytd-reel-shelf-renderer,yt-tab-shape[tab-title="Shorts"],ytd-guide-entry-renderer>a[title="Shorts"] {display: none !important;}</style>`)
   }
 });
 
-chrome.storage.sync.get('nothanks', function (data) {
+chrome.storage.sync.get('nothanks', function(data) {
   if (data.nothanks) {
     document.head.insertAdjacentHTML("beforeend", `<style>
 #flexible-item-buttons.style-scope.ytd-menu-renderer yt-button-view-model:has(path[d="M11 17h2v-1h1c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1h-3v-1h4V8h-2V7h-2v1h-1c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h3v1H9v2h2v1zm5.5-15c-1.74 0-3.41.88-4.5 2.28C10.91 2.88 9.24 2 7.5 2 4.42 2 2 4.64 2 7.99c0 4.12 3.4 7.48 8.55 12.58L12 22l1.45-1.44C18.6 15.47 22 12.11 22 7.99 22 4.64 19.58 2 16.5 2zm-3.75 17.85-.75.74-.74-.73-.04-.04C6.27 14.92 3 11.69 3 7.99 3 5.19 4.98 3 7.5 3c1.4 0 2.79.71 3.71 1.89L12 5.9l.79-1.01C13.71 3.71 15.1 3 16.5 3 19.02 3 21 5.19 21 7.99c0 3.7-3.28 6.94-8.25 11.86z"]),
@@ -306,22 +306,35 @@ ytd-menu-service-item-renderer:has(path[d="M11 17h2v-1h1c.55 0 1-.45 1-1v-3c0-.5
   }
 });
 
-chrome.storage.sync.get('nomix', function (data) {
+chrome.storage.sync.get('nomix', function(data) {
   if (data.nomix) {
-    const observer = new MutationObserver(function(mutations) {
+    const observer = new MutationObserver(function(){
     document.querySelectorAll('ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-renderer.ytd-playlist-thumbnail)').forEach(t => {t.style.display = 'none';})
   });
   observer.observe(document, {subtree: true, childList: true});
   }
 });
 
-chrome.storage.sync.get('nopink', function (data) {
+chrome.storage.sync.get('nopink', function(data) {
   if (data.nopink) {
-    const observer = new MutationObserver(function(mutations) {
-    document.querySelectorAll('[enable-refresh-signature-moments-web]').forEach(t => {t.removeAttribute('enable-refresh-signature-moments-web')});
-    document.querySelectorAll('.ytp-cairo-refresh-signature-moments').forEach(t => {t.classList.remove('ytp-cairo-refresh-signature-moments')});
-    document.querySelectorAll('.ytp-cairo-refresh').forEach(t => {t.classList.remove('ytp-cairo-refresh')});
-  });
-  observer.observe(document, {subtree: true, childList: true});
+    document.head.insertAdjacentHTML('beforeend', `<style>
+  .ytp-play-progress {
+    background: rgb(255, 0, 51) !important;
+  }
+</style>`);
+  }
+});
+
+chrome.storage.sync.get('fixchannelsection', function(data) {
+  if (data.fixchannelsection) {
+    document.head.insertAdjacentHTML('beforeend', `<style>
+  #avatar-section .style-scope.ytd-channel-renderer {
+    width: 136px;
+  }
+  #avatar-section {
+    flex: 0 !important;
+    min-width: 136px !important;
+  }
+</style>`);
   }
 });

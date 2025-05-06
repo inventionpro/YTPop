@@ -10,7 +10,7 @@ function set(name) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  ['enabled','down','noads','novideoads','norick','nocurves','noshorts','nothanks','nomix','nopink'].forEach(e => {
+  ['enabled','down','noads','novideoads','norick','nocurves','noshorts','nothanks','nomix','nopink','fixchannelsection'].forEach(e => {
     set(e)
   })
 
