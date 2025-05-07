@@ -318,7 +318,7 @@ chrome.storage.sync.get('nomix', function(data) {
 chrome.storage.sync.get('nopink', function(data) {
   if (data.nopink) {
     document.head.insertAdjacentHTML('beforeend', `<style>
-  .ytp-play-progress {
+  :not(.ad-interrupting,.ytp-yto-preroll,.ytp-color-party) > div > div > div > div > div > div > .ytp-play-progress {
     background: rgb(255, 0, 51) !important;
   }
 </style>`);
