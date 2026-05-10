@@ -36,9 +36,9 @@ async function change() {
   document.querySelector('#container.style-scope.ytd-player').style.display = 'none';
   fetch('https://api.fsh.plus/video?id='+id()).then(async res => {
     let ytv = await res.json();
-    shut()
+    shut();
     ytv = ytv.video;
-    document.querySelector('#player-container-outer.style-scope.ytd-watch-flexy').insertAdjacentHTML("afterbegin", `<video controls autoplay id="ytpop" src="${ytv}" allow="autoplay" style="position:relative;margin-bottom:15px;width:-webkit-fill-available;aspect-ratio:4/2.25;border-radius:1.5rem;min-height:350px;"></video>`);
+    document.querySelector('#player-container-outer.style-scope.ytd-watch-flexy').insertAdjacentHTML('afterbegin', `<video controls autoplay id="ytpop" src="${ytv}" allow="autoplay" style="position:relative;margin-bottom:15px;width:-webkit-fill-available;aspect-ratio:4/2.25;border-radius:1.5rem;min-height:350px;"></video>`);
     let player = document.getElementById('ytpop');
     
     let previousUrl = '';
@@ -57,10 +57,10 @@ async function change() {
           })
         }
       } else {
-        shut()
+        shut();
       }
     });
-    observer.observe(document, {subtree: true, childList: true});
+    observer.observe(document, { subtree: true, childList: true });
     
     document.body.onkeyup = function(e) {
       if (e.target.tagName.toLowerCase() === 'input') return;
@@ -99,10 +99,8 @@ async function change() {
   })
 }
 
-chrome.storage.sync.get('enabled', function(data) {
-  if (data.enabled) {
-    change()
-  }
+chrome.storage.sync.get('enabled', (data)=>{
+  if (data.enabled) change();
 });
 
 async function down() {
@@ -110,7 +108,7 @@ async function down() {
   while (!document.querySelector('ytd-menu-renderer.style-scope.ytd-watch-metadata')) {
     await delay(500)
   }
-  document.querySelector('#actions ytd-menu-renderer yt-button-shape#button-shape.style-scope.ytd-menu-renderer').insertAdjacentHTML("beforebegin", `<style>
+  document.querySelector('#actions ytd-menu-renderer yt-button-shape#button-shape.style-scope.ytd-menu-renderer').insertAdjacentHTML('beforebegin', `<style>
   button:focus {
     outline: none;
   }
@@ -146,32 +144,30 @@ async function down() {
     <option value="audio">Audio (mp3)</option>
   </select>
   <br>
-  <button onclick="const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value + '?id='+(window.location.href.split('v=')[1] || '').split('&')[0]+'&max=99999999999';fetch(url).then(async e => {e = await e.json();window.open(e.download);});" style="background-color: #3ea6ff;border: none;padding: 6px;margin: 4px;border-radius: 1rem;cursor: pointer;">Download</button>
+  <button onclick="const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value + '?id='+(window.location.href.split('v=')[1] || '').split('&')[0];fetch(url).then(async e => {e = await e.json();window.open(e.download);});" style="background-color: #3ea6ff;border: none;padding: 6px;margin: 4px;border-radius: 1rem;cursor: pointer;">Download</button>
   <button onclick="document.getElementById('ytpopmodal').close()" style="border: none;color: #3ea6ff;background: transparent;position: absolute;right: 0;bottom: 0;padding: 16px 30px;cursor: pointer;">Close</button>
 </dialog>`)
   //document.querySelector('#above-the-fold #title h1 yt-formatted-string').innerHTML
-  const observer = new MutationObserver(function(){
+  const observer = new MutationObserver(()=>{
     document.querySelectorAll('#flexible-item-buttons.style-scope.ytd-menu-renderer ytd-download-button-renderer').forEach(t => {t.style.display = 'none';})
 	  document.querySelectorAll('tp-yt-paper-listbox.style-scope.ytd-menu-popup-renderer ytd-menu-service-item-download-renderer').forEach(t => {t.style.display = 'none';})
   });
-  observer.observe(document, {subtree: true, childList: true});
+  observer.observe(document, { subtree: true, childList: true });
 }
 
-chrome.storage.sync.get('down', function(data) {
-  if (data.down) {
-    down()
-  }
+chrome.storage.sync.get('down', (data)=>{
+  if (data.down) down();
 });
 
 let shadowRealm = [];
 function sendToShadowRealm(id) {
   document.querySelectorAll(id).forEach(t=>{
     shadowRealm.push(t);
-    t.style.opacity = 0;
-    t.style.width = 0;
-    t.style.height = 0;
-    t.style.margin = 0;
-    t.style.padding = 0;
+    t.style.opacity = '0';
+    t.style.width = '0px';
+    t.style.height = '0px';
+    t.style.margin = '0px';
+    t.style.padding = '0px';
     t.style['pointer-events'] = 'none';
   });
 }
@@ -180,12 +176,15 @@ function unShadowRealm() {
     t.style.opacity = '';
     t.style.width = '';
     t.style.height = '';
-  })
+    t.style.margin = '';
+    t.style.padding = '';
+    t.style['pointer-events'] = '';
+  });
   shadowRealm = [];
 }
 
 function noads() {
-  const observer = new MutationObserver(function(){
+  const observer = new MutationObserver(()=>{
     unShadowRealm();
     /* Static ads */
     // Feed
@@ -233,17 +232,15 @@ function noads() {
     sendToShadowRealm('#feedback.style-scope.ytd-enforcement-message-view-model')
     document.querySelectorAll('#body.style-scope.ytd-enforcement-message-view-model').forEach(e=>{
       e.innerHTML=`<p>Sorry, seems like youtube has flagged YTPop or another ad blocking extension.</p>
-<p>If you only have YTPop enabled, create a issue in the <a href="https://github.com/inventionpro/YTPop/issues" style="color:#b7f">Github</a></p>
+<p>If you only have YTPop enabled, create an issue in the <a href="https://github.com/inventionpro/YTPop/issues" style="color:#b7f">Github</a></p>
 <button>Close</button>`;
     })
   });
-  observer.observe(document, {subtree: true, childList: true});
+  observer.observe(document, { subtree: true, childList: true });
 }
 
-chrome.storage.sync.get('noads', function(data) {
-  if (data.noads) {
-    noads()
-  }
+chrome.storage.sync.get('noads', (data)=>{
+  if (data.noads) noads();
 });
 
 // TODO: fix yt flagging this
@@ -259,7 +256,7 @@ function novideoads() {
    '[id^="skip-ad"] button',
    '[id^="skip-button"]',
   ];
-  const observer = new MutationObserver(function(){
+  const observer = new MutationObserver(()=>{
     /* Video ads */
     const video = document.querySelector('video');
     const adElement = document.querySelector('.video-ads.ytp-ad-module');
@@ -275,59 +272,48 @@ function novideoads() {
       skipButton.click()
     }
   });
-  observer.observe(document, {subtree: true, childList: true});
+  observer.observe(document, { subtree: true, childList: true });
 }
 
-chrome.storage.sync.get('novideoads', function(data) {
-  if (data.novideoads) {
-    novideoads();
-  }
+chrome.storage.sync.get('novideoads', (data)=>{
+  if (data.novideoads) novideoads();
 });
 
-chrome.storage.sync.get('nocurves', function(data) {
-  if (data.nocurves) {
-    document.head.insertAdjacentHTML("beforeend", `<style>* {border-radius: 0 !important;}</style>`);
-  }
+chrome.storage.sync.get('nocurves', (data)=>{
+  if (data.nocurves) document.head.insertAdjacentHTML('beforeend', `<style>*,*::before,*::after{border-radius:0px !important;}</style>`);
 });
 
-chrome.storage.sync.get('noshorts', function(data) {
-  if (data.noshorts) {
-    document.head.insertAdjacentHTML("beforeend", `<style>ytd-rich-section-renderer.style-scope.ytd-rich-grid-renderer,ytd-reel-shelf-renderer,yt-tab-shape[tab-title="Shorts"],ytd-guide-entry-renderer>a[title="Shorts"] {display: none !important;}</style>`)
-  }
+chrome.storage.sync.get('noshorts', (data)=>{
+  if (data.noshorts) document.head.insertAdjacentHTML('beforeend', `<style>ytd-rich-section-renderer.style-scope.ytd-rich-grid-renderer,ytd-reel-shelf-renderer,yt-tab-shape[tab-title="Shorts"],ytd-guide-entry-renderer>a[title="Shorts"] {display: none !important;}</style>`);
 });
 
-chrome.storage.sync.get('nothanks', function(data) {
-  if (data.nothanks) {
-    document.head.insertAdjacentHTML("beforeend", `<style>
+chrome.storage.sync.get('nothanks', (data)=>{
+  if (data.nothanks) document.head.insertAdjacentHTML('beforeend', `<style>
 #flexible-item-buttons.style-scope.ytd-menu-renderer yt-button-view-model:has(path[d="M11 17h2v-1h1c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1h-3v-1h4V8h-2V7h-2v1h-1c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h3v1H9v2h2v1zm5.5-15c-1.74 0-3.41.88-4.5 2.28C10.91 2.88 9.24 2 7.5 2 4.42 2 2 4.64 2 7.99c0 4.12 3.4 7.48 8.55 12.58L12 22l1.45-1.44C18.6 15.47 22 12.11 22 7.99 22 4.64 19.58 2 16.5 2zm-3.75 17.85-.75.74-.74-.73-.04-.04C6.27 14.92 3 11.69 3 7.99 3 5.19 4.98 3 7.5 3c1.4 0 2.79.71 3.71 1.89L12 5.9l.79-1.01C13.71 3.71 15.1 3 16.5 3 19.02 3 21 5.19 21 7.99c0 3.7-3.28 6.94-8.25 11.86z"]),
 ytd-menu-service-item-renderer:has(path[d="M11 17h2v-1h1c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1h-3v-1h4V8h-2V7h-2v1h-1c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h3v1H9v2h2v1zm5.5-15c-1.74 0-3.41.88-4.5 2.28C10.91 2.88 9.24 2 7.5 2 4.42 2 2 4.64 2 7.99c0 4.12 3.4 7.48 8.55 12.58L12 22l1.45-1.44C18.6 15.47 22 12.11 22 7.99 22 4.64 19.58 2 16.5 2zm-3.75 17.85-.75.74-.74-.73-.04-.04C6.27 14.92 3 11.69 3 7.99 3 5.19 4.98 3 7.5 3c1.4 0 2.79.71 3.71 1.89L12 5.9l.79-1.01C13.71 3.71 15.1 3 16.5 3 19.02 3 21 5.19 21 7.99c0 3.7-3.28 6.94-8.25 11.86z"])    {
   display: none !important;
-}</style>`)
-  }
+}</style>`);
 });
 
-chrome.storage.sync.get('nomix', function(data) {
+chrome.storage.sync.get('nomix', (data)=>{
   if (data.nomix) {
-    const observer = new MutationObserver(function(){
-    document.querySelectorAll('ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-renderer.ytd-playlist-thumbnail)').forEach(t => {t.style.display = 'none';})
-  });
-  observer.observe(document, {subtree: true, childList: true});
+    const observer = new MutationObserver(()=>{
+      document.querySelectorAll('ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-renderer.ytd-playlist-thumbnail)').forEach(t => {t.style.display = 'none';})
+    });
+    observer.observe(document, { subtree: true, childList: true });
   }
 });
 
-chrome.storage.sync.get('nopink', function(data) {
-  if (data.nopink) {
-    document.head.insertAdjacentHTML('beforeend', `<style>
+chrome.storage.sync.get('nopink', (data)=>{
+  if (data.nopink) document.head.insertAdjacentHTML('beforeend', `<style>
   :not(.ad-interrupting,.ytp-yto-preroll,.ytp-color-party) > div > div > div > div > div > div > .ytp-play-progress {
     background: rgb(255, 0, 51) !important;
   }
 </style>`);
-  }
 });
 
-chrome.storage.sync.get('fixchannelsection', function(data) {
-  if (data.fixchannelsection) {
-    document.head.insertAdjacentHTML('beforeend', `<style>
+chrome.storage.sync.get('fixchannelsection', (data)=>{
+  if (data.fixchannelsection) document.head.insertAdjacentHTML('beforeend', `<style>
   #avatar-section .style-scope.ytd-channel-renderer {
     width: 136px;
   }
@@ -336,5 +322,4 @@ chrome.storage.sync.get('fixchannelsection', function(data) {
     min-width: 136px !important;
   }
 </style>`);
-  }
 });

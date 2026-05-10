@@ -1,12 +1,22 @@
 body {
-  width: 180px;
+  font-family: Lexend, Arial;
+  color: #ddd;
+  width: 200px;
   padding: 5px;
   background-color: #181818;
-  color: #fff;
-  font-family: Arial;
 }
-.inline > * {
-  display: inline-block;
+.inline {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+details > details {
+  padding-left: 5px;
+  border-left: 2px #444 solid;
+}
+summary {
+  font-weight: bold;
 }
 
 .switch {
@@ -14,25 +24,22 @@ body {
   display: inline-block;
   width: 30px;
   height: 17px;
+  margin-top: 2px;
 }
 
 .switch input {
-  opacity: 0;
   width: 0;
   height: 0;
+  opacity: 0;
 }
 
 .slider {
-  position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  background-color: #444;
+  transition: 500ms;
 }
 
 .slider:before {
@@ -42,10 +49,9 @@ body {
   width: 13px;
   left: 2px;
   bottom: 2px;
+  border-radius: 2rem;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
+  transition: 500ms;
 }
 
 input:checked + .slider {
@@ -57,21 +63,13 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(13px);
-  -ms-transform: translateX(13px);
   transform: translateX(13px);
-}
-
-br {
-  display: block;
-  content: "";
-  margin: 5px;
 }
 
 kbd {
   margin: 1px;
   padding: 1px;
-  border: 1px #ccc solid;
+  border: 1px #ddd solid;
   border-radius: 0.2rem;
 }
 label + kbd {
