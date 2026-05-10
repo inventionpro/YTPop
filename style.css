@@ -2,7 +2,7 @@ body {
   font-family: Lexend, Arial;
   color: #ddd;
   width: 200px;
-  padding: 5px;
+  margin: 5px;
   background-color: #181818;
 }
 .inline {
@@ -74,4 +74,8 @@ kbd {
 }
 label + kbd {
   margin-left: 15px;
+}
+
+a {
+  color: #b7f;
 }

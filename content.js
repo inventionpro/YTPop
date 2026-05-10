@@ -113,15 +113,13 @@ async function down() {
     outline: none;
   }
   .ytpopdown {
-    margin-left: 10px;
+    cursor: pointer;
     fill: #fff;
-    border: none;
-    background-color: #4e4e4e80;
-    border-radius: 2rem;
     width: 35px;
     height: 35px;
-    aspect-ratio: 1/1;
-    cursor: pointer;
+    border: none;
+    border-radius: 2rem;
+    background-color: #4e4e4e80;
   }
   .ytpopdown:hover {
     background-color: #80808080;
@@ -131,10 +129,10 @@ async function down() {
     opacity: 0.3;
   }
 </style>
-<button onclick="document.getElementById('ytpopmodal').showModal()" class="ytpopdown">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><path d="M17 18v1H6v-1h11zm-.5-6.6-.7-.7-3.8 3.7V4h-1v10.4l-3.8-3.8-.7.7 5 5 5-4.9z"></path></svg>
+<button id="ytpopdown" class="ytpopdown">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M12 2a1 1 0 00-1 1v11.586l-4.293-4.293a1 1 0 10-1.414 1.414L12 18.414l6.707-6.707a1 1 0 10-1.414-1.414L13 14.586V3a1 1 0 00-1-1Zm7 18H5a1 1 0 000 2h14a1 1 0 000-2Z"></path></svg>
 </button>
-<dialog id="ytpopmodal" style="background-color:#373737;border:none;color:#fff;width:25vw;height:25vh;border-radius:12px;font-size:14px;">
+<dialog id="ytpopmodal" closedby="any" style="background-color:#373737;border:none;color:#fff;width:25vw;height:25vh;border-radius:12px;font-size:14px;">
   <h1>YT Pop</h1>
   <p>Download this youtube video</p>
   <br>
@@ -144,10 +142,23 @@ async function down() {
     <option value="audio">Audio (mp3)</option>
   </select>
   <br>
-  <button onclick="const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value + '?id='+(window.location.href.split('v=')[1] || '').split('&')[0];fetch(url).then(async e => {e = await e.json();window.open(e.download);});" style="background-color: #3ea6ff;border: none;padding: 6px;margin: 4px;border-radius: 1rem;cursor: pointer;">Download</button>
-  <button onclick="document.getElementById('ytpopmodal').close()" style="border: none;color: #3ea6ff;background: transparent;position: absolute;right: 0;bottom: 0;padding: 16px 30px;cursor: pointer;">Close</button>
-</dialog>`)
-  //document.querySelector('#above-the-fold #title h1 yt-formatted-string').innerHTML
+  <button id="ytpopdownload" style="background-color:#3ea6ff;border:none;padding:6px;margin:4px;border-radius:1rem;cursor:pointer;">Download</button>
+  <button id="typopclose" style="border: none;color:#3ea6ff;background:transparent;position:absolute;right:0;bottom:0;padding:16px 30px;cursor:pointer;">Close</button>
+</dialog>`);
+  document.getElementById('ytpopdown').onclick = ()=>{
+    document.getElementById('ytpopmodal').showModal();
+  };
+  document.getElementById('ytpopdownload').onclick = ()=>{
+    const url = 'https://api.fsh.plus/' + document.getElementsByTagName('select')[0].value+'?id='+id();
+    fetch(url)
+      .then(async e => {
+        e = await e.json();
+        window.open(e.download);
+      });
+  };
+  document.getElementById('typopclose').onclick = ()=>{
+    document.getElementById('ytpopmodal').close();
+  };
   const observer = new MutationObserver(()=>{
     document.querySelectorAll('#flexible-item-buttons.style-scope.ytd-menu-renderer ytd-download-button-renderer').forEach(t => {t.style.display = 'none';})
 	  document.querySelectorAll('tp-yt-paper-listbox.style-scope.ytd-menu-popup-renderer ytd-menu-service-item-download-renderer').forEach(t => {t.style.display = 'none';})
