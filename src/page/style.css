@@ -1,5 +1,5 @@
 body {
-  font-family: Lexend, Arial;
+  font-family: Lexend, Arial, sans-serif;
   color: #ddd;
   width: 200px;
   margin: 5px;
@@ -11,12 +11,24 @@ body {
   align-items: center;
 }
 
-details > details {
-  padding-left: 5px;
-  border-left: 2px #444 solid;
+input[type="color"] {
+  height: 20px;
+  padding: 0px;
+  border: none;
+  border-radius: 5px;
+}
+::-webkit-color-swatch-wrapper {
+  padding: 0px;
 }
 summary {
   font-weight: bold;
+}
+details div {
+  padding-left: 5px;
+  border-left: 2px #444 solid;
+  max-height: 200px;
+  transition: max-height 500ms;
+  overflow: hidden;
 }
 
 .switch {
@@ -55,15 +67,22 @@ summary {
 }
 
 input:checked + .slider {
-  background-color: #b7f;
+  background-color: #a8e;
 }
-
 input:focus + .slider {
-  box-shadow: 0 0 1px #b7f;
+  box-shadow: 0 0 1px #a8e;
 }
-
 input:checked + .slider:before {
   transform: translateX(13px);
+}
+
+label:has(input) {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.switch:not(:has(input:checked)) + label + div {
+  max-height: 0px;
 }
 
 kbd {
@@ -77,5 +96,5 @@ label + kbd {
 }
 
 a {
-  color: #b7f;
+  color: #a8e;
 }

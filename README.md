@@ -1,28 +1,24 @@
-<img src="favicon.png" alt="YT Pop Logo" width="100">
+<h1 align="center">
+  <sub><img src="src/img/icon-64.png" alt="YTPop Logo" width="40" height="40"></sub>
+  YTPop
+</h1>
+<p align="center">YouTube enhancements</p>
 
-# YTPop
-Better youtube
+## Features (toggleable)
 
-## Features
-All the features (toggleable)
-
-### Functional
-**Videos**
-- Download button
-- No rickrolls
-
-**ADs**
+### Feed
 - No static ADs
-- No video ADs
-- No AD player
-
-### Visual
-**Content**
-- Fix channel section sidebar
-- No youtube shorts
-- No thanks button
+- No shorts
 - No playlists (mix) videos
 
-**Styling**
+### Video
+- Download button
+- No thanks button
+- Progress bar colors (Main, AD, and Preroll)
+- No video ADs
+- Fix channel section
+- No AD player
+
+### Other
 - No curves
-- No pink progress
+- No animations

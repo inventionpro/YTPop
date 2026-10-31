@@ -1,9 +1,12 @@
 {
   "name": "YTPop",
-  "version": "0.9.2",
-  "description": "Better youtube, by Inv",
+  "version": "0.10.0",
+  "description": "YouTube enhancements, made by Inventionpro",
   "icons": {
-    "512": "./favicon.png"
+    "16": "src/img/icon-16.png",
+    "32": "src/img/icon-32.png",
+    "64": "src/img/icon-64.png",
+    "128": "src/img/icon-128.png"
   },
   "permissions": [
     "storage"
@@ -16,41 +19,30 @@
     "*://mobile.youtube.com/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/js/background.js"
   },
   "content_scripts": [
     {
       "matches": ["*://youtube.com/*", "*://www.youtube.com/*", "*://gaming.youtube.com/*", "*://m.youtube.com/*", "*://mobile.youtube.com/*"],
-      "js": ["content.js"]
+      "js": ["src/js/content.js"]
     }
   ],
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "./favicon.png"
+    "default_popup": "src/page/popup.html",
+    "default_icon": {
+      "16": "src/img/icon-16.png",
+      "32": "src/img/icon-32.png",
+      "64": "src/img/icon-64.png"
+    }
   },
   "commands": {
     "enabled": {
-      "suggested_key": {
-        "default": "Alt+Z"
-      },
       "description": "Enable/Disable player modifier"
     },
-    "down": {
-      "suggested_key": {
-        "default": "Alt+X"
-      },
-      "description": "Enable/Disable download button modifier"
-    },
     "noads": {
-      "suggested_key": {
-        "default": "Alt+C"
-      },
       "description": "Enable/Disable no static ads modifier"
     },
     "novideoads": {
-      "suggested_key": {
-        "default": "Alt+V"
-      },
       "description": "Enable/Disable no video ads modifier"
     }
   },

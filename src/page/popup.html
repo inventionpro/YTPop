@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YTpop</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <span class="inline">
+      <img src="/src/img/icon-32.png" width="32" height="32">
+      <h1 style="margin:0">YTPop</h1>
+    </span>
+    <details open>
+      <summary>Feed</summary>
+      <label class="switch">
+        <input type="checkbox" id="noads">
+        <span class="slider"></span>
+      </label>
+      <label for="noads">No static ADs</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="noshorts">
+        <span class="slider"></span>
+      </label>
+      <label for="noshorts">No shorts</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="nomix">
+        <span class="slider"></span>
+      </label>
+      <label for="nomix">No playlists (mix) videos</label>
+    </details>
+    <details open>
+      <summary>Video</summary>
+      <label class="switch">
+        <input type="checkbox" id="down">
+        <span class="slider"></span>
+      </label>
+      <label for="down">Download button</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="nothanks">
+        <span class="slider"></span>
+      </label>
+      <label for="nothanks">No thanks button</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="progresscolorchange">
+        <span class="slider"></span>
+      </label>
+      <label for="progresscolorchange">Progress bar colors</label>
+      <div>
+        <label for="progresscolor">Main color <input type="color" id="progresscolor"></label>
+        <label for="progresscolorad">AD color <input type="color" id="progresscolorad"></label>
+        <label for="progresscolorpreroll">Preroll color <input type="color" id="progresscolorpreroll"></label>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="novideoads">
+        <span class="slider"></span>
+      </label>
+      <label for="novideoads">No video ADs</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="fixchannelsection">
+        <span class="slider"></span>
+      </label>
+      <label for="fixchannelsection">Fix channel section</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="enabled">
+        <span class="slider"></span>
+      </label>
+      <label for="enabled">No AD player</label>
+    </details>
+    <details open>
+      <summary>Other</summary>
+      <label class="switch">
+        <input type="checkbox" id="nocurves">
+        <span class="slider"></span>
+      </label>
+      <label for="nocurves">No curves</label>
+      <br>
+      <label class="switch">
+        <input type="checkbox" id="noanimation">
+        <span class="slider"></span>
+      </label>
+      <label for="noanimation">No animations</label>
+    </details>
+
+    <div class="inline" style="margin-top:5px">
+      <a href="https://github.dev/inventionpro/YTPop" target="_blank">GitHub</a>
+      <div style="flex:1"></div>
+      <span id="ver">v0</span>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
