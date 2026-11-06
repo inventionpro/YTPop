@@ -267,6 +267,7 @@ chrome.storage.sync.get(null, (data)=>{
   ${data.progresscolorchange?`:not(.ytp-color-party) .ytp-progress-bar > div {
     div > div > .ytp-play-progress, .ytp-scrubber-button { background: ${data.progresscolor} !important }
   }
+  .ytProgressBarPlayheadProgressBarPlayheadDot, .ytProgressBarLineProgressBarPlayed, .ytThumbnailOverlayProgressBarHostWatchedProgressBarSegment { background: ${data.progresscolor} !important }
   .ad-interrupting:not(.ytp-color-party) .ytp-progress-bar > div {
     div > div > .ytp-play-progress, .ytp-scrubber-button { background: ${data.progresscolorad} !important }
   }
